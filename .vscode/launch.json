@@ -39,12 +39,7 @@
       "linux": {
         "firefoxExecutable": "firefox-developer-edition" // Configuración automática cuando programes desde Ubuntu
       },
-      "preferences": {
-        // MAESTRO DE TEMA (1 = Oscuro / 0 = Claro). Controla el navegador y la web juntos.
-        "ui.systemUsesDarkTheme": 0,
-        // Al estar en '3', hereda automáticamente la paleta de la variable de arriba. ¡No lo edites!
-        "layout.css.prefers-color-scheme.content-override": 3
-      },
+
       "preLaunchTask": "iniciar-servidor-nextjs"
     },
     {
@@ -59,12 +54,7 @@
       "linux": {
         "firefoxExecutable": "firefox-developer-edition"
       },
-      "preferences": {
-        // MAESTRO DE TEMA (1 = Oscuro / 0 = Claro). Controla el navegador y la web juntos.
-        "ui.systemUsesDarkTheme": 0,
-        // Al estar en '3', hereda automáticamente la paleta de la variable de arriba. ¡No lo edites!
-        "layout.css.prefers-color-scheme.content-override": 3
-      },
+
       "webRoot": "${workspaceFolder}"
     }
   ]
