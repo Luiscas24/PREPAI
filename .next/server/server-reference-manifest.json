@@ -1,0 +1,17 @@
+{
+  "node": {
+    "400e5b8cf31821253f9f5a66b4cae52e7d35c5b9d2": {
+      "workers": {
+        "app/ai-reminder/page": {
+          "moduleId": "[project]/.next-internal/server/app/ai-reminder/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ai-reminder/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/ai-reminder/page": "action-browser"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "TZria0gYOzIB6WEao9AVw3PF6DhRZs8ikKg2cOJeGnk="
+}

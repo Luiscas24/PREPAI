@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "Dose": {
+      "title": "Dosis de PrEP",
+      "description": "Registro de una dosis individual de medicamento PrEP.",
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora de la dosis programada o tomada."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["taken", "missed", "pending"],
+          "description": "Estado de la dosis."
+        },
+        "confirmedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fecha y hora exacta en que el usuario confirmó la toma."
+        }
+      },
+      "required": ["date", "status"]
+    },
+    "Appointment": {
+      "title": "Cita Médica",
+      "description": "Citas de control médico o entrega de medicamentos.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "type": {
+          "type": "string",
+          "enum": ["Control trimestral", "Exámenes de sangre", "Solicitud de Entrega"]
+        },
+        "location": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "date", "type", "location"]
+    },
+    "Supply": {
+      "title": "Suministro",
+      "description": "Estado actual del suministro de medicamento del usuario.",
+      "type": "object",
+      "properties": {
+        "pills": { "type": "number", "description": "Píldoras restantes." },
+        "pillsPerBottle": { "type": "number", "description": "Capacidad del frasco." },
+        "lastRefill": { "type": "string", "format": "date-time", "description": "Fecha de la última recarga." }
+      },
+      "required": ["pills", "pillsPerBottle", "lastRefill"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com", "password"]
+  },
+  "firestore": {
+    "/users/{userId}/doses/{doseId}": {
+      "schema": { "$ref": "#/backend/entities/Dose" },
+      "description": "Historial de dosis del usuario."
+    },
+    "/users/{userId}/appointments/{appointmentId}": {
+      "schema": { "$ref": "#/backend/entities/Appointment" },
+      "description": "Citas programadas del usuario."
+    },
+    "/users/{userId}/supply/current": {
+      "schema": { "$ref": "#/backend/entities/Supply" },
+      "description": "Estado del suministro actual del usuario."
+    }
+  }
+}
