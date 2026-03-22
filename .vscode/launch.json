@@ -3,10 +3,12 @@
   "configurations": [
     {
       "name": "👁️ Iniciar Todo: Servidor + Vista Interna",
+      // Esta configuración arranca tu servidor de desarrollo (Next.js) 
+      // y abre la previsualización nativa de Chrome u oculta la terminal de Chrome.
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run dev",
-      "preLaunchTask": "limpiar-sesion-dev",
+      "preLaunchTask": "limpiar-sesion-dev", // Tarea oculta que mata cualquier localhost:3000 previo
       "serverReadyAction": {
         "pattern": "- Local:\\s+(https?://localhost:\\d+)",
         "uriFormat": "%s",
@@ -15,27 +17,37 @@
     },
     {
       "name": "👁️ Solo Vista Interna (Servidor ya activo)",
+      // Utiliza esta configuración si arrancaste 'npm run dev' manualmente en otra terminal.
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:3000",
+      "runtimeArgs": [
+        "--force-dark-mode" // Borra o comenta (//) esta línea para probar el modo Claro (Light Mode) en Chrome
+      ],
       "webRoot": "${workspaceFolder}"
     },
     {
       "name": "🦊 Iniciar Todo: Servidor + Firefox",
+      // Levanta el servidor primero (matando puertos viejos) y luego lanza "Firefox Developer Edition".
+      // Requiere la extensión de VS Code: "Debugger for Firefox".
       "type": "firefox",
       "request": "launch",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}",
       "osx": {
         "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
       },
       "linux": {
-        "firefoxExecutable": "firefox-developer-edition"
+        "firefoxExecutable": "firefox-developer-edition" // Configuración automática cuando programes desde Ubuntu
+      },
+      "preferences": {
+        // Tema global del navegador Firefox: 1 = Modo Oscuro / 0 = Modo Claro
+        "ui.systemUsesDarkTheme": 1
       },
       "preLaunchTask": "iniciar-servidor-nextjs"
     },
     {
       "name": "🦊 Solo Firefox (Servidor ya activo)",
+      // Mismas reglas de depuración de Firefox, pero asumiendo que el puerto 3000 ya está levantado.
       "type": "firefox",
       "request": "launch",
       "url": "http://localhost:3000",
@@ -44,6 +56,10 @@
       },
       "linux": {
         "firefoxExecutable": "firefox-developer-edition"
+      },
+      "preferences": {
+        // Tema global del navegador Firefox: 1 = Modo Oscuro / 0 = Modo Claro
+        "ui.systemUsesDarkTheme": 1
       },
       "webRoot": "${workspaceFolder}"
     }
