@@ -1,4 +1,5 @@
 'use client';
+import * as React from 'react';
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -9,8 +10,17 @@ import { useTheme } from 'next-themes';
 import { useSupply } from '@/components/providers/supply-provider';
 
 export default function SettingsPage() {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const { supply, setPills } = useSupply();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // O un esqueleto de carga
+  }
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -29,13 +39,13 @@ export default function SettingsPage() {
                 Modo Oscuro
               </Label>
               <CardDescription>
-                Activa el tema oscuro para una mejor visualización.
+                Activa el tema oscuro o déjalo según el navegador.
               </CardDescription>
             </div>
             <Switch
               id="dark-mode"
               aria-label="Toggle dark mode"
-              checked={theme === 'dark'}
+              checked={resolvedTheme === 'dark'}
               onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
             />
           </div>

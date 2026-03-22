@@ -8,7 +8,7 @@
       // Detecta en qué Sistema Operativo estás y corre comandos de terminal nativos:
       "type": "shell",
       "osx": {
-        "command": "pkill -f \"Firefox Developer Edition\" >/dev/null 2>&1 || true; PIDS=$(lsof -ti tcp:3000); if [ ! -z \"$PIDS\" ]; then kill -9 $PIDS; echo 'Sesión previa terminada (Mac). Puerto y Navegador limpios.'; else echo 'Ambiente limpio (Mac).'; fi"
+        "command": "pkill -f \"Firefox Developer Edition\" >/dev/null 2>&1 || true; PIDS=$(lsof -ti tcp:3000); if [ ! -z \"$PIDS\" ]; then echo \"$PIDS\" | xargs kill -9; echo 'Sesión previa terminada (Mac). Puerto y Navegador limpios.'; else echo 'Ambiente limpio (Mac).'; fi"
       },
       "linux": {
         "command": "pkill -f \"firefox-developer-edition\" >/dev/null 2>&1 || true; fuser -k 3000/tcp >/dev/null 2>&1 || true; echo 'Sesión previa terminada (Linux). Puerto y Navegador limpios.'"
