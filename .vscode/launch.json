@@ -26,6 +26,12 @@
       "request": "launch",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
+      "osx": {
+        "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
+      },
+      "linux": {
+        "firefoxExecutable": "firefox-developer-edition"
+      },
       "preLaunchTask": "iniciar-servidor-nextjs"
     },
     {
@@ -33,6 +39,12 @@
       "type": "firefox",
       "request": "launch",
       "url": "http://localhost:3000",
+      "osx": {
+        "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
+      },
+      "linux": {
+        "firefoxExecutable": "firefox-developer-edition"
+      },
       "webRoot": "${workspaceFolder}"
     }
   ]

@@ -4,7 +4,12 @@
     {
       "label": "limpiar-sesion-dev",
       "type": "shell",
-      "command": "PIDS=$(lsof -ti tcp:3000); if [ ! -z \"$PIDS\" ]; then kill -9 $PIDS; echo 'Sesión previa terminada. Puerto 3000 liberado.'; else echo 'El puerto 3000 está disponible.'; fi",
+      "osx": {
+        "command": "pkill -f \"Firefox Developer Edition\" >/dev/null 2>&1 || true; PIDS=$(lsof -ti tcp:3000); if [ ! -z \"$PIDS\" ]; then kill -9 $PIDS; echo 'Sesión previa terminada (Mac). Puerto y Navegador limpios.'; else echo 'Ambiente limpio (Mac).'; fi"
+      },
+      "linux": {
+        "command": "pkill -f \"firefox-developer-edition\" >/dev/null 2>&1 || true; fuser -k 3000/tcp >/dev/null 2>&1 || true; echo 'Sesión previa terminada (Linux). Puerto y Navegador limpios.'"
+      },
       "presentation": {
         "reveal": "silent",
         "clear": true
