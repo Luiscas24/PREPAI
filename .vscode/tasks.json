@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "limpiar-sesion-dev",
+      "type": "shell",
+      "command": "PIDS=$(lsof -ti tcp:3000); if [ ! -z \"$PIDS\" ]; then kill -9 $PIDS; echo 'Sesión previa terminada. Puerto 3000 liberado.'; else echo 'El puerto 3000 está disponible.'; fi",
+      "presentation": {
+        "reveal": "silent",
+        "clear": true
+      }
+    },
+    {
+      "label": "iniciar-servidor-nextjs",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "dependsOn": "limpiar-sesion-dev",
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "next dev",
+          "endsPattern": "Local:\\s+http://localhost"
+        }
+      }
+    }
+  ]
+}

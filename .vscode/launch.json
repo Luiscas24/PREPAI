@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "👁️ Iniciar Todo: Servidor + Vista Interna",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "preLaunchTask": "limpiar-sesion-dev",
+      "serverReadyAction": {
+        "pattern": "- Local:\\s+(https?://localhost:\\d+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    },
+    {
+      "name": "👁️ Solo Vista Interna (Servidor ya activo)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "🦊 Iniciar Todo: Servidor + Firefox",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "iniciar-servidor-nextjs"
+    },
+    {
+      "name": "🦊 Solo Firefox (Servidor ya activo)",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
