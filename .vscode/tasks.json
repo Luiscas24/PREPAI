@@ -20,24 +20,11 @@
     },
     {
       "label": "iniciar-servidor-nextjs",
-      // Tarea invisible que inicia Next.js usando npm run dev.
-      // Usa 'dependsOn' para asegurarse que el puerto y proceso mueran primero.
-      "type": "npm",
-      "script": "dev",
-      "isBackground": true,
-      "dependsOn": "limpiar-sesion-dev",
-      "problemMatcher": {
-        "owner": "custom",
-        "pattern": {
-          "regexp": "^$"
-        },
-        "background": {
-          // No le dice a VS Code "Ya terminé" hasta que detecte que Turbopack escupe la dirección Local.
-          "activeOnStart": true,
-          "beginsPattern": "next dev",
-          "endsPattern": "Local:\\s+http://localhost"
-        }
-      }
+      // Tarea que inicia Next.js y espera un tiempo
+      "type": "shell",
+      "command": "npm run dev & sleep 15 && echo 'Servidor listo'",
+      "dependsOn": ["limpiar-sesion-dev"],
+      "problemMatcher": []
     }
   ]
 }

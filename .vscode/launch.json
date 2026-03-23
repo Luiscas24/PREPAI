@@ -10,7 +10,7 @@
       "command": "npm run dev",
       "preLaunchTask": "limpiar-sesion-dev", // Tarea oculta que mata cualquier localhost:3000 previo
       "serverReadyAction": {
-        "pattern": "- Local:\\s+(https?://localhost:\\d+)",
+        "pattern": "- Local:\\s+(https?://\\S+)",
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
@@ -20,7 +20,7 @@
       // Utiliza esta configuración si arrancaste 'npm run dev' manualmente en otra terminal.
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000",
+      "url": "https://localhost:3000",
       "runtimeArgs": [
         "--force-dark-mode" // Borra o comenta (//) esta línea para probar el modo Claro (Light Mode) en Chrome
       ],
@@ -30,24 +30,17 @@
       "name": "🦊 Iniciar Todo: Servidor + Firefox",
       // Levanta el servidor primero (matando puertos viejos) y luego lanza "Firefox Developer Edition".
       // Requiere la extensión de VS Code: "Debugger for Firefox".
-      "type": "firefox",
+      "type": "node-terminal",
       "request": "launch",
-      "url": "http://localhost:3000",
-      "osx": {
-        "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
-      },
-      "linux": {
-        "firefoxExecutable": "firefox-developer-edition" // Configuración automática cuando programes desde Ubuntu
-      },
-
-      "preLaunchTask": "iniciar-servidor-nextjs"
+      "command": "npm run dev & sleep 8 && '/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox' https://localhost:3000",
+      "preLaunchTask": "limpiar-sesion-dev",
     },
     {
       "name": "🦊 Solo Firefox (Servidor ya activo)",
       // Mismas reglas de depuración de Firefox, pero asumiendo que el puerto 3000 ya está levantado.
       "type": "firefox",
       "request": "launch",
-      "url": "http://localhost:3000",
+      "url": "https://localhost:3000",
       "osx": {
         "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
       },
