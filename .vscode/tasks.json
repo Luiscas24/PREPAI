@@ -19,10 +19,25 @@
       }
     },
     {
-      "label": "iniciar-servidor-nextjs",
-      // Tarea que inicia Next.js y espera un tiempo
+      "label": "limpiar-firefox",
+      // Solo mata Firefox sin tocar el servidor
       "type": "shell",
-      "command": "npm run dev & sleep 15 && echo 'Servidor listo'",
+      "osx": {
+        "command": "pkill -f \"Firefox Developer Edition\" >/dev/null 2>&1 || true; echo 'Firefox cerrado.'"
+      },
+      "linux": {
+        "command": "pkill -f \"firefox-developer-edition\" >/dev/null 2>&1 || true; echo 'Firefox cerrado.'"
+      },
+      "presentation": {
+        "reveal": "silent",
+        "clear": true
+      }
+    },
+    {
+      "label": "iniciar-servidor-nextjs-debug",
+      // Tarea que inicia Next.js y espera más tiempo para depuración
+      "type": "shell",
+      "command": "npm run dev & sleep 10 && until curl -k -s https://localhost:3000 >/dev/null 2>&1; do sleep 1; done && echo 'Servidor listo para debug'",
       "dependsOn": ["limpiar-sesion-dev"],
       "problemMatcher": []
     }

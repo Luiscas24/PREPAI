@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "👁️ Iniciar Todo: Servidor + Vista Interna",
+      "name": "👁️ Iniciar Todo: Servidor + Chrome",
       // Esta configuración arranca tu servidor de desarrollo (Next.js) 
       // y abre la previsualización nativa de Chrome u oculta la terminal de Chrome.
       "type": "node-terminal",
@@ -10,13 +10,13 @@
       "command": "npm run dev",
       "preLaunchTask": "limpiar-sesion-dev", // Tarea oculta que mata cualquier localhost:3000 previo
       "serverReadyAction": {
-        "pattern": "- Local:\\s+(https?://\\S+)",
-        "uriFormat": "%s",
+        "pattern": "Local.*https://localhost",
+        "uriFormat": "https://localhost:3000",
         "action": "debugWithChrome"
       }
     },
     {
-      "name": "👁️ Solo Vista Interna (Servidor ya activo)",
+      "name": "👁️ Solo Chrome (Servidor activo)",
       // Utiliza esta configuración si arrancaste 'npm run dev' manualmente en otra terminal.
       "type": "chrome",
       "request": "launch",
@@ -28,27 +28,17 @@
     },
     {
       "name": "🦊 Iniciar Todo: Servidor + Firefox",
-      // Levanta el servidor primero (matando puertos viejos) y luego lanza "Firefox Developer Edition".
-      // Requiere la extensión de VS Code: "Debugger for Firefox".
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev & sleep 8 && '/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox' https://localhost:3000",
-      "preLaunchTask": "limpiar-sesion-dev",
+      "command": "npm run dev & sleep 10 && open -na 'Firefox Developer Edition' https://localhost:3000",
+      "preLaunchTask": "limpiar-sesion-dev"
     },
     {
-      "name": "🦊 Solo Firefox (Servidor ya activo)",
-      // Mismas reglas de depuración de Firefox, pero asumiendo que el puerto 3000 ya está levantado.
-      "type": "firefox",
+      "name": "🦊 Solo Firefox (Servidor activo)",
+      "type": "node-terminal",
       "request": "launch",
-      "url": "https://localhost:3000",
-      "osx": {
-        "firefoxExecutable": "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
-      },
-      "linux": {
-        "firefoxExecutable": "firefox-developer-edition"
-      },
-
-      "webRoot": "${workspaceFolder}"
+      "command": "open -na 'Firefox Developer Edition' --args https://localhost:3000",
+      "preLaunchTask": "limpiar-firefox"
     }
   ]
 }
